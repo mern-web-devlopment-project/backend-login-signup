@@ -13,7 +13,8 @@ const addNewUser = async(req,res) => {
     }
     )
     try{
-      const existingUser = userModel.findOne(req.body.email)
+      const existingUser = await userModel.findOne({email:String(req.body.email)})
+     
       if(existingUser){
         return res.status(409).json({message:'email already exists'})
       }
